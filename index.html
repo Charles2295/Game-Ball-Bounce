@@ -15,27 +15,41 @@
 <script>
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+    // Defines the positon of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
+    var x = canvas.width/2;
+    var y = canvas.height-30;
 
+    // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
     function draw() {
-        // drawing code
+        ctx.beginPath();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.arc(x, y, 15, 0, Math.PI*2);
+        ctx.fillStyle = "#32dd60";
+        ctx.fill();
+        x += dx;
+        y += dy;
+        ctx.closePath();
     }
     setInterval(draw, 10);
 
+    var dx = 2;
+    var dy = -2;
+
     ctx.beginPath();
-    ctx.rect(20, 40, 50, 50);
-    ctx.fillStyle = "#FF0000";
+    ctx.rect(20, 40, 100, 25);
+    ctx.fillStyle = "#3880ff";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.arc(100, 260, 50, 0, 2 * Math.PI);
-    ctx.fillStyle = "#000fff";
+    ctx.rect(150, 40, 100, 25);
+    ctx.fillStyle = "#3880ff";
     ctx.fill();
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.rect(1000,200,400,190);
-    ctx.fillStyle = "#11ff00";
+    ctx.rect(280, 40, 100, 25);
+    ctx.fillStyle = "#3880ff";
     ctx.fill();
     ctx.closePath();
 
