@@ -25,22 +25,24 @@
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#32dd60";
+        ctx.fillStyle = "#dd1815";
         ctx.fill();
         ctx.closePath();
     }
-
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall(); // Used to link the draw function to the drawball function; this format just keeps the code clean
         x += dx;
         y += dy;
-    }
+        if(y + dy > canvas.height || y + dy < 0) { // Define the top and bottom wall barrier - prevent the ball from leaving the screen
+            dy = -dy;
+        }
+        if(x + dx > canvas.height || x + dx < 0) { // Define the top and bottom wall barrier - prevent the ball from leaving the screen
+            dx = -dx;
+        }
     setInterval(draw, 10);
 
-    // Define the
-
-    // Blocks to Destroy
+    // Blocks to Destroy - these are the targets
     ctx.beginPath();
     ctx.rect(20, 40, 100, 25);
     ctx.fillStyle = "#3880ff";
