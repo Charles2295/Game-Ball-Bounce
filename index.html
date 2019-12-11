@@ -5,21 +5,26 @@
     <title>Gamedev Canvas Workshop</title>
     <style>
         * { padding: 0; margin: 0; }
-        canvas { background: #eee; display: block; margin: 0 auto; padding: 10px;}
+       canvas { background-image: url("Background-0.png"); display: block; margin: 0 auto; padding: 10px; }
+        /*canvas { background-color: aqua; display: block; margin: 0 auto; padding: 10px; }*/
     </style>
 </head>
 <body>
 
- <canvas id="myCanvas" width="1400" height="500"></canvas>
+<div id='seconds-counter'> </div>
+<canvas id="myCanvas" width="1080" height="500"></canvas>
 
 <script>
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
-    var x = canvas.width/2; // Defines the position of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
-    var y = canvas.height-30; // Defines the position of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
-    var dx = 2; // Defines the starting position of the ball
-    var dy = -2; // Defines the starting position of the ball
+    var x = canvas.width/2; // Defines the starting position of the ball
+    var y = canvas.height-30; // Defines the starting position of the ball
+    var dx = 4; // Speed of the ball on x-axis
+    var dy = -4; // Speed of the ball on y-axis
     var ballRadius = 10; // Defines the size of the ball; needed for collision detection
+    // var seconds = 0; //Time in seconds
+    // var el = document.getElementById('seconds-counter');
+
 
     // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
     function drawBall() {
@@ -29,39 +34,30 @@
         ctx.fill();
         ctx.closePath();
     }
+
+    // function timer() {
+    //     seconds += 1;
+    //     el.innerText = "You have been here for " + seconds + " seconds.";
+    //     if(seconds > 300) {
+    //         dx = 10;
+    //         dy = -10;
+    //     }
+    // }
+    // var cancel = setInterval(timer, 1000); //This is one second
+
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall(); // Used to link the draw function to the drawball function; this format just keeps the code clean
-        x += dx;
-        y += dy;
-        if(y + dy > canvas.height || y + dy < ballRadius) { // Define the top and bottom wall barrier - prevent the ball from leaving the screen
-            dy = -dy;
-        }
-        if(x + dx > canvas.height || x + dx < ballRadius) { // Define the left and right wall barrier - prevent the ball from leaving the screen
+        if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) { // Define the left and right wall barrier - prevent the ball from leaving the screen
             dx = -dx;
         }
+        if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) { // Define the top and bottom wall barrier - prevent the ball from leaving the screen
+            dy = -dy;
+        }
+        x += dx;
+        y += dy;
     }
     setInterval(draw, 10);
-
-    // Blocks to Destroy - these are the targets
-    ctx.beginPath();
-    ctx.rect(20, 40, 100, 25);
-    ctx.fillStyle = "#3880ff";
-    ctx.fill();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.rect(150, 40, 100, 25);
-    ctx.fillStyle = "#3880ff";
-    ctx.fill();
-    ctx.closePath();
-
-    ctx.beginPath();
-    ctx.rect(280, 40, 100, 25);
-    ctx.fillStyle = "#3880ff";
-    ctx.fill();
-    ctx.closePath();
-    // End of Blocks to Destroy
 
 </script>
 
