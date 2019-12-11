@@ -15,26 +15,29 @@
 <script>
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
-    // Defines the positon of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
-    var x = canvas.width/2;
-    var y = canvas.height-30;
+    var x = canvas.width/2; // Defines the position of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
+    var y = canvas.height-30; // Defines the position of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
+    var dx = 2; // Defines the starting position of the ball
+    var dy = -2; //Defines the starting position of the ball
 
     // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
-    function draw() {
+    function drawBall() {
         ctx.beginPath();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.arc(x, y, 15, 0, Math.PI*2);
+        ctx.arc(x, y, 10, 0, Math.PI*2);
         ctx.fillStyle = "#32dd60";
         ctx.fill();
+        ctx.closePath();
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBall();
         x += dx;
         y += dy;
-        ctx.closePath();
     }
     setInterval(draw, 10);
 
-    var dx = 2;
-    var dy = -2;
-
+    // Blocks to Destroy
     ctx.beginPath();
     ctx.rect(20, 40, 100, 25);
     ctx.fillStyle = "#3880ff";
@@ -52,6 +55,7 @@
     ctx.fillStyle = "#3880ff";
     ctx.fill();
     ctx.closePath();
+    // End of Blocks to Destroy
 
 </script>
 
