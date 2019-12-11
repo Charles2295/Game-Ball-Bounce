@@ -18,12 +18,13 @@
     var x = canvas.width/2; // Defines the position of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
     var y = canvas.height-30; // Defines the position of the ball at any given moment. This is used instead of hardcoding the location of the ball; allowing it to move around the page.
     var dx = 2; // Defines the starting position of the ball
-    var dy = -2; //Defines the starting position of the ball
+    var dy = -2; // Defines the starting position of the ball
+    var ballRadius = 10; // Defines the size of the ball; needed for collision detection
 
     // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
     function drawBall() {
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI*2);
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
         ctx.fillStyle = "#32dd60";
         ctx.fill();
         ctx.closePath();
@@ -31,11 +32,13 @@
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawBall();
+        drawBall(); // Used to link the draw function to the drawball function; this format just keeps the code clean
         x += dx;
         y += dy;
     }
     setInterval(draw, 10);
+
+    // Define the
 
     // Blocks to Destroy
     ctx.beginPath();
