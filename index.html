@@ -16,6 +16,11 @@
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
 
+    function draw() {
+        // drawing code
+    }
+    setInterval(draw, 10);
+
     ctx.beginPath();
     ctx.rect(20, 40, 50, 50);
     ctx.fillStyle = "#FF0000";
@@ -23,8 +28,14 @@
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+    ctx.arc(100, 260, 50, 0, 2 * Math.PI);
     ctx.fillStyle = "#000fff";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(1000,200,400,190);
+    ctx.fillStyle = "#11ff00";
     ctx.fill();
     ctx.closePath();
 
