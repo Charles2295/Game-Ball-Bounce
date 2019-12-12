@@ -20,22 +20,42 @@
     var ballRadius = 12; // Defines the size of the ball; needed for collision detection
     var paddleHeight = 10; //Defines the paddle height manipulated by keyboard input
     var paddleWidth = 75; //Defines the paddle width manipulated by keyboard input
-    var paddleX = (canvas.width-paddleWidth) / 2;
+    var paddleX = (canvas.width-paddleWidth) / 2; // Determines the x-axis value of the paddle. We do not define 'paddleY' variable because we do not want it to move vertically
     var rightPressed = false; // Are set to false until pressed
     var leftPressed = false; // Are set to false until pressed
 
     // User Controls
 
-    //End of User Controls
+    document.addEventListener("keydown", keyDownHandler, false); // Listens for if the key has been pressed. The function 'keyDownHandler' determines what key to listen for
+    document.addEventListener("keyup", keyUpHandler, false); // Listens for if the key has been pressed. The function 'keyDownHandler' determines what key to listen for
 
-    function drawPaddle() {
+    function keyDownHandler(e) { // Defines the behaviour once the key is pressed, it does not account for key release, this is specified using the function 'keyUpHandler'
+        if (e.key == "Right" || e.key == "ArrowRight") { // == If the right arrow key is pressed, move right
+            rightPressed = true;
+        }
+        else if (e.key == "Left" || e.key == "ArrowLeft") { // == If the left arrow key is pressed, move left
+            leftPressed = true;
+        }
+    }
+
+    function keyUpHandler(e) { // Defines the behaviour of controls once the key is released.
+        if (e.key == "Right" || e.key == "ArrowRight") { // == If the right arrow key is released, stop moving right
+            rightPressed = false;
+        }
+        else if (e.key == "Left" || e.key == "ArrowLeft") { // == If the left arrow key is release, stop moving left
+            leftPressed = false;
+        }
+    }
+
+    // End of User Controls
+
+    function drawPaddle() { // Defines the surface controlled by the user
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
         ctx.fillStyle = "#0095DD";
         ctx.fill();
         ctx.closePath();
     }
-
 
     function drawBall() { // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
         ctx.beginPath();
@@ -54,9 +74,24 @@
             if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) { // Define the top and bottom wall barrier - prevent the ball from leaving the screen
             dy = -dy;
         }
+            if (rightPressed) { // Defines how much to move the paddle by when pressed
+                paddleX += 7; // Applies a positive integer on the x-axis
+                if (paddleX + paddleWidth > canvas.width) {
+                    paddleX = canvas.width - paddleWidth;
+                }
+            }
+            else if (leftPressed) {
+                paddleX -= 7; // Applies a negative integer on the x-axis
+                if (paddleX < 0) {
+                    paddleX = 0;
+                }
+
+            }
+
         x += dx;
         y += dy;
     }
+
     setInterval(draw, 10); // This calls the function 'draw' 20 times per second
 
     // Start of Objects to Destroy
