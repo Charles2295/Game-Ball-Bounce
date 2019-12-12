@@ -24,6 +24,7 @@
     var rightPressed = false; // Are set to false until pressed
     var leftPressed = false; // Are set to false until pressed
 
+
     // User Controls
 
     document.addEventListener("keydown", keyDownHandler, false); // Listens for if the key has been pressed. The function 'keyDownHandler' determines what key to listen for
@@ -74,9 +75,6 @@
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) { // Define the left and right wall barrier - prevent the ball from leaving the screen
             dx = -dx;
         }
-        //     if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) { // Define the top and bottom wall barrier - prevent the ball from leaving the screen
-        //     dy = -dy;
-        // }
 
         if(y + dy < ballRadius) {
             dy = -dy;
@@ -102,9 +100,7 @@
                 if (paddleX < 0) {
                     paddleX = 0;
                 }
-
             }
-
         x += dx;
         y += dy;
     }
@@ -112,12 +108,16 @@
     var interval= setInterval(draw, 10); // This calls the function 'draw' 20 times per second
 
     // Start of Objects to Destroy
-    ctx.beginPath();
-    ctx.rect(160, 10, 100, 40);
-    ctx.strokeStyle = "rgba(23,162,184,0.5)";
-    ctx.fill();
-    ctx.stroke();
-    ctx.closePath();
+
+    function drawBricks() {
+
+        ctx.beginPath();
+        ctx.rect(160, 10, 100, 40);
+        ctx.strokeStyle = "rgba(23,162,184,1)";
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+    }
 
     ctx.beginPath();
     ctx.rect(160, 10, 100, 40);
