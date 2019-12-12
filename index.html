@@ -2,31 +2,35 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Gamedev Canvas Workshop</title>
+    <title>Ball Bounce!</title>
     <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
-
 </head>
 <body>
 
 <div id='seconds-counter'> </div>
-<canvas id="myCanvas" width="1080" height="500"></canvas>
+<canvas id="myCanvas" width="1080" height="500"></canvas> <!-- Defines the -->
 
 <script>
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     var x = canvas.width/2; // Defines the starting position of the ball
     var y = canvas.height-30; // Defines the starting position of the ball
-    var dx = 4; // Speed of the ball on x-axis
+    var dx = 4; // Speed of the ball on x-axis and defines
     var dy = -4; // Speed of the ball on y-axis
-    var ballRadius = 10; // Defines the size of the ball; needed for collision detection
-    var seconds = 0; //Time in seconds
-    var el = document.getElementById('seconds-counter');
+    var ballRadius = 12; // Defines the size of the ball; needed for collision detection
+    var paddleHeight = 10; //Defines the paddle height manipulated by keyboard input
+    var paddleWidth = 75; //Defines the paddle width manipulated by keyboard input
+    var paddleX = (canvas.width-paddleWidth) / 2;
 
-    var multiplierApplied = false;
+    function drawPaddle() {
+        ctx.beginPath();
+        ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+    }
 
-
-        // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
-    function drawBall() {
+    function drawBall() { // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
         ctx.fillStyle = "#dd1815";
@@ -35,7 +39,6 @@
     }
 
     function draw() {
-        timer();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawBall(); // Used to link the draw function to the drawball function; this format just keeps the code clean
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) { // Define the left and right wall barrier - prevent the ball from leaving the screen
@@ -46,23 +49,24 @@
         }
         x += dx;
         y += dy;
-
     }
     setInterval(draw, 10); // This calls the function 'draw' 20 times per second
 
+    // Start of Objects to Destroy
+    ctx.beginPath();
+    ctx.rect(160, 10, 100, 40);
+    ctx.strokeStyle = "rgba(23,162,184,0.5)";
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
 
-    // setInterval(timer, 1); //This is one second
-
-    // function timer() {
-    //     seconds += 1;
-    //     el.innerText = "You have been here for " + seconds + " seconds.";
-    //     if(seconds > 300 && multiplierApplied === false) {
-    //         dx = dx * 3; //Multiplying the values by 2, making the ball move twice as fast
-    //         dy = dy * 3;
-    //         multiplierApplied = true;
-    //     }
-    //
-    // }
+    ctx.beginPath();
+    ctx.rect(160, 10, 100, 40);
+    ctx.strokeStyle = "rgba(23,162,184,0.5)";
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    // End of Objects to Destroy
 
 </script>
 
