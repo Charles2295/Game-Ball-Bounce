@@ -15,8 +15,8 @@
     var ctx = canvas.getContext("2d");
     var x = canvas.width/2; // Defines the starting position of the ball
     var y = canvas.height-30; // Defines the starting position of the ball
-    var dx = 4; // Speed of the ball on x-axis and defines
-    var dy = -4; // Speed of the ball on y-axis
+    var dx = 4; // Speed of the ball on x-axis and its direction
+    var dy = -4; // Speed of the ball on x-axis and its direction
     var ballRadius = 12; // Defines the size of the ball; needed for collision detection
     var paddleHeight = 10; //Defines the paddle height manipulated by keyboard input
     var paddleWidth = 75; //Defines the paddle width manipulated by keyboard input
@@ -67,7 +67,8 @@
 
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawBall(); // Used to link the draw function to the drawball function; this format just keeps the code clean
+        drawBall();// Used to link the draw function to the drawball function; this format just keeps the code clean
+        drawPaddle();
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) { // Define the left and right wall barrier - prevent the ball from leaving the screen
             dx = -dx;
         }
