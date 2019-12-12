@@ -21,6 +21,12 @@
     var paddleHeight = 10; //Defines the paddle height manipulated by keyboard input
     var paddleWidth = 75; //Defines the paddle width manipulated by keyboard input
     var paddleX = (canvas.width-paddleWidth) / 2;
+    var rightPressed = false; // Are set to false until pressed
+    var leftPressed = false; // Are set to false until pressed
+
+    // User Controls
+
+    //End of User Controls
 
     function drawPaddle() {
         ctx.beginPath();
@@ -29,6 +35,7 @@
         ctx.fill();
         ctx.closePath();
     }
+
 
     function drawBall() { // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
         ctx.beginPath();
