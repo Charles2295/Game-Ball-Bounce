@@ -113,7 +113,7 @@
                 dy =- dy
             }
             else {
-                // alert("GAME OVER");
+                alert("GAME OVER");
                 document.location.reload();
                 clearInterval(interval); // Needed for Chrome to end game
             }
@@ -134,8 +134,6 @@
         x += dx;
         y += dy;
     }
-
-
 
 
     var interval= setInterval(draw, 10); // This calls the function 'draw' 10 times per second
