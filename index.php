@@ -23,7 +23,6 @@
     var paddleWidth = 75; //Defines the paddle width manipulated by keyboard input
     var paddleX = (canvas.width-paddleWidth) / 2; // Determines the x-axis value of the paddle. We do not define 'paddleY' variable because we do not want it to move vertically
     var brickRowCount = 3; // Defines the number of rows of bricks
-
     var brickColumnCount = 7; // Defines the number of columns of bricks
     var brickWidth = 100; // Brick width
     var brickHeight = 30; // Brick height
@@ -53,12 +52,12 @@
     function drawBall() { // The following function "draw" defines the parameters for the ball and it called upon by 'setInterval' to refresh every 10 seconds
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-        ctx.fillStyle = "#dd1815";
+        ctx.fillStyle = "#3ab918";
         ctx.fill();
         ctx.closePath();
     }
 
-    // Creates number of bricks - set by brickColumnCount
+    // Creates number of columns and rows until meets defined limit in variables 'brickColumnCount' and 'brickRowCount'
     function drawBricks() {
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
@@ -76,11 +75,38 @@
     }
     // End of Bricks
 
+    // Bricks: Collision detection
+    function brickCollisionDetection() {
+        for(var col=0; col < brickColumnCount; col++) {
+            for(var row=0; row < brickRowCount; row++) {
+                var b = bricks[col][row];
+                // The following if statement defines:
+                    // For the center of the ball to be inside the brick, all four of the following statements need to be true:
+                    // The x position of the ball is greater than the x position of the brick.
+                    // The x position of the ball is less than the x position of the brick plus its width.
+                    // The y position of the ball is greater than the y position of the brick.
+                    // The y position of the ball is less than the y position of the brick plus its height.
+                if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                    dy = -dy;
+                }
+            }
+        }
+    }
+
+    for (var col=0; col < brickColumnCount; col++) {
+        bricks [col] = [];
+        for (var row=0; row < brickColumnCount; row++) {
+            bricks [col] [row] = { x: 0, y: 0, status: = 1};
+        }
+    } // Now that we have established a status and what defines that status, we go to 'drawBricks' which will change the 'status: 0' if collision is detected.
+
+    // End of Bricks: Collision detection
+
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawBricks();
-        drawBall();// Used to link the draw function to the drawball function; this format just keeps the code clean
-        drawPaddle();
+        drawBricks(); // We want these items to draw at the same time as 'interval= setInterval(draw, 10);' refreshes
+        drawBall(); // Used to link the draw function to the drawball function; this format just keeps the code clean // We want these items to draw at the same time as 'interval= setInterval(draw, 10);' refreshes
+        drawPaddle(); // We want these items to draw at the same time as 'interval= setInterval(draw, 10);' refreshes
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) { // Define the left and right wall barrier - prevent the ball from leaving the screen
             dx = -dx;
         }
@@ -94,7 +120,7 @@
             else {
                 // alert("GAME OVER");
                 document.location.reload();
-                clearInterval(interval); // Needed for Chrome to end game
+                clearInterval(interval);
             }
         }
 
@@ -113,10 +139,7 @@
         x += dx;
         y += dy;
     }
-
     var interval= setInterval(draw, 10); // This calls the function 'draw' 10 times per second
-
-
 
 
 </script>
