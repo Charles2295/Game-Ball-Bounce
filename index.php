@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <title>Charles Lawrenson | Ball Bounce!</title>
     <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
-    <script type="text/javascript" src="js/user_controls.js"></script>
+    <script type="text/javascript" src="js/user_controls.js"></script> <!-- Linking javascript files to index.php-->
 </head>
 <body>
 
 <div id='seconds-counter'> </div>
-<canvas id="myCanvas" width="1080" height="500"></canvas> <!-- Defines the -->
+<canvas id="myCanvas" width="1080" height="500"></canvas>
 
 <script>
     var canvas = document.getElementById("myCanvas");
@@ -23,6 +23,7 @@
     var paddleWidth = 75; //Defines the paddle width manipulated by keyboard input
     var paddleX = (canvas.width-paddleWidth) / 2; // Determines the x-axis value of the paddle. We do not define 'paddleY' variable because we do not want it to move vertically
     var brickRowCount = 3; // Defines the number of rows of bricks
+
     var brickColumnCount = 7; // Defines the number of columns of bricks
     var brickWidth = 100; // Brick width
     var brickHeight = 30; // Brick height
