@@ -98,7 +98,7 @@
         for (var row=0; row < brickColumnCount; row++) {
             bricks [col] [row] = { x: 0, y: 0, status: = 1};
         }
-    } // Now that we have established a status and what defines that status, we go to 'drawBricks' which will change the 'status: 0' if collision is detected.
+    } // Now that we have established a status and what defines that status, we go to 'drawBricks' which will
 
     // End of Bricks: Collision detection
 
@@ -120,7 +120,7 @@
             else {
                 // alert("GAME OVER");
                 document.location.reload();
-                clearInterval(interval);
+                clearInterval(interval); // Needed for Chrome to end game
             }
         }
 
