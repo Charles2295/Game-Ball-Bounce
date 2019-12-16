@@ -19,17 +19,17 @@
     var dx = 4; // Speed of the ball on x-axis and its direction
     var dy = -4; // Speed of the ball on x-axis and its direction
     var ballRadius = 12; // Defines the size of the ball; needed for collision detection
-    var paddleHeight = 10; //Defines the paddle height manipulated by keyboard input
-    var paddleWidth = 75; //Defines the paddle width manipulated by keyboard input
+    var paddleHeight = 12; //Defines the paddle height manipulated by keyboard input
+    var paddleWidth = 95; //Defines the paddle width manipulated by keyboard input
     var paddleX = (canvas.width-paddleWidth) / 2; // Determines the x-axis value of the paddle. We do not define 'paddleY' variable because we do not want it to move vertically
-    var brickRowCount = 3; // Defines the number of rows of bricks
-    var brickColumnCount = 8; // Defines the number of columns of bricks
-    var brickWidth = 100; // Brick width
+    var brickRowCount = 2; // Defines the number of rows of bricks
+    var brickColumnCount = 7; // Defines the number of columns of bricks
+    var brickWidth = 120; // Brick width
     var brickHeight = 30; // Brick height
     var brickPadding = 20; // Default brick padding
     var brickPaddingHeight = 20; // Spacing around brick
     var brickPaddingWidth = 90; // Spacing around brick
-    var brickOffsetTop = 30; // Brick Position y-axis
+    var brickOffsetTop = 50; // Brick Position y-axis
     var brickOffsetLeft = 60; // Brick Position x-axis
     var bricks = [];
     var score = 0;
@@ -53,6 +53,11 @@
                         dy = -dy;
                         b.status = 0;
                         score++;
+                        if (score === brickRowCount * brickColumnCount) {
+                            alert ("You WIN!, Congratulations!");
+                            document.location.reload();
+                            clearInterval(interval);
+                        }
                     }
                 }
             }
@@ -94,7 +99,7 @@
     }
 
     function drawScore() {
-        ctx.font = "20px Arial";
+        ctx.font = "25px Arial";
         ctx.fillStyle = "#0095DD";
         ctx.fillText("Score: "+score, 8, 20);
     }
