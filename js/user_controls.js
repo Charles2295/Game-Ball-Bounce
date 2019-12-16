@@ -1,5 +1,4 @@
-// User Controls
-
+// Keyboard Controls
 var rightPressed = false; // Are set to false until keyDownHandler down function changes state
 var leftPressed = false; // Are set to false until keyDownHandler down function changes state
 
@@ -23,4 +22,14 @@ function keyUpHandler(e) { // Defines the behaviour of controls once the key is 
     }
 }
 
-// End of User Controls
+// Mouse Controls
+var relativeX = e.clientX - canvas.offsetLeft;
+
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+function mouseMoveHandler(e) {
+    var relativeX = e.clientX - canvas.offsetLeft;
+    if(relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth/2;
+    }
+}

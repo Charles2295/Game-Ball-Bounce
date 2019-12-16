@@ -34,7 +34,6 @@
     var bricks = [];
     var score = 0;
 
-    //------------------------------------------------------------//
 
     // Generating bricks
     for (var c = 0; c < brickColumnCount; c++) {
@@ -48,7 +47,7 @@
         for (var c = 0; c < brickColumnCount; c++) {
             for (var r = 0; r < brickRowCount; r++) {
                 var b = bricks[c][r];
-                if (b.status == 1) {
+                if (b.status === 1) {
                     if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                         dy = -dy;
                         b.status = 0;
