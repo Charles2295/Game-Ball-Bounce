@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Charles Lawrenson | Ball Bounce!</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style-game.css">
     <script type="text/javascript" src="js/user_controls.js"></script> <!-- Linking javascript files to index.php-->
 </head>
 <body>
@@ -33,6 +33,7 @@
     var brickOffsetLeft = 60; // Brick Position x-axis
     var bricks = [];
     var score = 0;
+    var lives = 3;
 
 
     // Generating bricks
@@ -100,7 +101,13 @@
     function drawScore() {
         ctx.font = "25px Arial";
         ctx.fillStyle = "#0095DD";
-        ctx.fillText("Score: "+score, 8, 20);
+        ctx.fillText("Score: "+score, 20, 20);
+    }
+
+    function drawLives() {
+        ctx.font = "25px Arial";
+        ctx.fillStyle = "#0095DD";
+        ctx.fillText("Lives: "+lives, canvas.width-105, 20);
     }
 
     function draw() {
@@ -109,7 +116,8 @@
         drawBall();
         drawPaddle();
         collisionDetection();
-        drawScore()
+        drawScore();
+        drawLives();
 
         if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
             dx = -dx;
@@ -124,9 +132,17 @@
                 }
             }
             else {
-                // alert("GAME OVER");
-                document.location.reload();
-                clearInterval(interval); // Needed for Chrome to end game
+                lives--;
+                if(!lives) {
+                    alert("GAME OVER");
+                    document.location.reload();
+                    clearInterval(interval); // Needed for Chrome to end game
+                }
+                else {
+                    x = canvas.width/2;
+                    y = canvas.height-30;
+                    paddleX = (canvas.width-paddleWidth)/2;
+                }
             }
         }
 
