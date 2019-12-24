@@ -4,15 +4,19 @@
     <meta charset="utf-8" />
     <title>Charles Lawrenson | Ball Bounce!</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style-game.css">
-    <script type="text/javascript" src="js/user_controls.js"></script> <!-- Linking javascript files to index.php-->
+    <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
 
 <div id='seconds-counter'> </div>
-<canvas id="myCanvas" width="1080" height="500"></canvas>
+<canvas id="gameCanvas" width="1080" height="500"></canvas>
+
+<button class="startBtn" onclick="startGame();" id="startBtnId">Start The Game</button>
+<button class="endBtn" onclick="endGame();" id="endBtnId">End The Game</button>
 
 <script>
-    var canvas = document.getElementById("myCanvas");
+    var canvas = document.getElementById("gameCanvas");
+    var endBtn1 = document.getElementById("endBtnId").style.visibility = "hidden";
     var ctx = canvas.getContext("2d");
     var x = canvas.width/2; // Defines the starting position of the ball
     var y = canvas.height-30; // Defines the starting position of the ball
@@ -83,7 +87,7 @@
     function drawBricks() {
         for (var c = 0; c < brickColumnCount; c++) {
             for (var r = 0; r < brickRowCount; r++) {
-                if (bricks[c][r].status == 1) {
+                if (bricks[c][r].status === 1) {
                     var brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
                     var brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
                     bricks[c][r].x = brickX;
@@ -117,7 +121,7 @@
         drawPaddle();
         collisionDetection();
         drawScore();
-        drawLives();
+        drawLives()
 
         if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
             dx = -dx;
@@ -136,7 +140,7 @@
                 if(!lives) {
                     alert("GAME OVER");
                     document.location.reload();
-                    clearInterval(interval); // Needed for Chrome to end game
+                    clearInterval(interval);
                 }
                 else {
                     x = canvas.width/2;
@@ -157,9 +161,20 @@
         y += dy;
     }
 
-    var interval = setInterval(draw, 10);
+    function startGame() {
+        var interval = setInterval(draw, 10);
+        var element = document.getElementById("startBtnId").style.visibility = "hidden";
+        var endBtn1 = document.getElementById("endBtnId").style.visibility = "visible"; // This changes the state of the end game button to visivle to 'visible' once the start button has been pressed.
+    }
+
+    function endGame() {
+        var element = document.getElementById("endBtnId").style.visibility = "hidden"; // We want the end game button to be hidden as the page loads
+        document.location.reload();
+        clearInterval(interval);
+    }
 
 </script>
+<script type="text/javascript" src="js/user_controls.js"></script>
 
 </body>
 </html>

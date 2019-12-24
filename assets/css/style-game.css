@@ -1,0 +1,31 @@
+* { padding: 0; margin: 10; }
+
+canvas {
+    background-image: url("../img/Flat Night 4 BG.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.startBtn {
+    display: inline-block;
+    font-weight: 400;
+    color: white;
+    background-color: #0f6674;
+    padding: 8px;
+    position: relative;
+    top: 5px;
+    left: 23px;
+    outline: 2px black;
+    font-family: inherit;
+}
+
+.endBtn {
+    display: inline-block;
+    font-weight: 400;
+    color: white;
+    background-color: #0f6674;
+    padding: 8px;
+}
